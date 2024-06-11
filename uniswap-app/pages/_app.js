@@ -12,16 +12,23 @@ import {
 
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi'
 import { infuraProvider } from 'wagmi/providers/infura'
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
 const { chains, provider } = configureChains(
-  [chain.goerli],
+  [chain.sepolia, chain.arbitrum, chain.mainnet],
   [
     infuraProvider({
-      apiKey: 'f0267a8d7d5642caa8735db53507eefd',
-      priority: 1,
+      apiKey: "906ff2e9e368445aaa92b088c5da04b4",
+      priority: 2,
     }),
-  ],
-)
+    jsonRpcProvider({
+      priority: 1,
+      rpc: (chain) => ({
+        http: `127.0.0.1:9010`,
+      }),
+    }),
+  ]
+);
 
 const { connectors } = getDefaultWallets({
   appName: 'Custom Dex',

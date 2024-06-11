@@ -1,53 +1,45 @@
-import React, { useState } from 'react'
-import { ArrowSmUpIcon } from '@heroicons/react/outline'
+import React, { useState } from "react";
 
 const NavItems = () => {
-  const SWAP = 'Swap'
-  const POOL = 'Pool'
-  const VOTE = 'Vote'
-  const CHART = 'Charts'
+  const SWAP = "Token Swap";
+  const CRYPTO = "Crypto";
+  const TRENDING = "Trending";
+  const SAVED = "Saved";
 
-  const [selectedNavItem, setSelectedNavItem] = useState(SWAP)
+  const [activeLink, setActiveLink] = useState(CRYPTO); // Set default active link
 
   return (
-    <div className='bg-zinc-900 h-fit flex items-center justify-around rounded-full mx-6'>
+    <div className="md:flex-row w-fit h-fit flex flex-col mt-4 font-mono font-semibold items-center border justify-between border-[cyan] p-2 gap-2 rounded-lg">
       <p
-        className={getNavIconClassName(SWAP)}
-        onClick={() => setSelectedNavItem(SWAP)}
+        className={
+          activeLink === SWAP
+            ? "bg-gray-600 rounded  text-base text-center font-mono"
+            : "bg-[cyan] text-[#282c34]  flex items-center justify-center w-[110px]  rounded text-center"
+        }
+        onClick={() => setActiveLink(SWAP)}
       >
         {SWAP}
       </p>
-      <p
-        className={getNavIconClassName(POOL)}
-        onClick={() => setSelectedNavItem(POOL)}
+      <a
+        href="http://localhost:3001/"
+        className="bg-gray-600 rounded text-gray-500 flex items-center justify-center hover:text-[cyan] w-[110px] text-base text-center font-mono"
       >
-        {POOL}
-      </p>
-      <p
-        className={getNavIconClassName(VOTE)}
-        onClick={() => setSelectedNavItem(VOTE)}
+        {CRYPTO}
+      </a>
+      <a
+        href="http://localhost:3001/trending"
+        className="bg-gray-600 rounded  text-gray-500 w-[110px] flex items-center justify-center hover:text-[cyan] text-base text-center font-mono"
       >
-        {VOTE}
-      </p>
-      <p
-        className={getNavIconClassName(CHART)}
-        onClick={() => window.open('https://info.uniswap.org/#/', '_blank')}
+        {TRENDING}
+      </a>
+      <a
+        href="http://localhost:3001/saved"
+        className="bg-gray-600 rounded  text-gray-500 w-[110px] flex items-center justify-center hover:text-[cyan] text-base text-center font-mono"
       >
-        {CHART}
-        <ArrowSmUpIcon className='h-4 rotate-45' />
-      </p>
+        {SAVED}
+      </a>
     </div>
-  )
+  );
+};
 
-  function getNavIconClassName(name) {
-    let className =
-      'p-1 px-4 cursor-pointer border-[4px] border-transparent flex items-center'
-    className +=
-      name === selectedNavItem
-        ? ' bg-zinc-800 border-zinc-900 rounded-full'
-        : ''
-    return className
-  }
-}
-
-export default NavItems
+export default NavItems;
